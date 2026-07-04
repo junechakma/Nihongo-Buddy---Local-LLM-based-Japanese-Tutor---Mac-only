@@ -1,0 +1,5 @@
+module CVoicevox {
+    header "/Users/junechakma/Freelance/June Chakma/Nihongo Buddy/Nihongo Buddy/Vendor/voicevox_core-osx-arm64-0.16.4/include/voicevox_core.h"
+    link "voicevox_core"
+    export *
+}

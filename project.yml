@@ -1,0 +1,48 @@
+name: NihongoBuddy
+options:
+  bundleIdPrefix: com.junechakma
+  deploymentTarget:
+    macOS: "15.0"
+  createIntermediateGroups: true
+
+packages:
+  speech-swift:
+    url: https://github.com/soniqo/speech-swift
+    exactVersion: 0.0.21
+
+targets:
+  NihongoBuddy:
+    type: application
+    platform: macOS
+    sources:
+      - path: NihongoBuddy
+        excludes:
+          - "Resources/**"
+      - path: NihongoBuddy/Resources
+        type: folder
+        buildPhase: resources
+    dependencies:
+      - package: speech-swift
+        product: KokoroTTS
+    entitlements:
+      path: NihongoBuddy/NihongoBuddy.entitlements
+    info:
+      path: NihongoBuddy/Info.plist
+      properties:
+        NSMicrophoneUsageDescription: "Nihongo Buddy listens to your Japanese speech."
+        NSHumanReadableCopyright: "© 2026 June Chakma"
+        LSMinimumSystemVersion: "15.0"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.junechakma.NihongoBuddy
+        SWIFT_VERSION: "5.10"
+        MACOSX_DEPLOYMENT_TARGET: "15.0"
+        ENABLE_HARDENED_RUNTIME: true
+        DEAD_CODE_STRIPPING: true
+        CODE_SIGN_STYLE: Automatic
+        # llama.cpp linked from Homebrew, pinned build 9870 (docs/VALIDATION.md).
+        # Release builds must bundle the dylibs into the .app instead (§10).
+        SWIFT_INCLUDE_PATHS: "$(SRCROOT)/NihongoBuddy/CLlama $(SRCROOT)/NihongoBuddy/CVoicevox"
+        OTHER_SWIFT_FLAGS: "-Xcc -I/opt/homebrew/opt/llama.cpp/include -Xcc -I/opt/homebrew/opt/ggml/include -Xcc -DVOICEVOX_LOAD_ONNXRUNTIME"
+        LIBRARY_SEARCH_PATHS: "/opt/homebrew/opt/llama.cpp/lib $(SRCROOT)/Vendor/voicevox_core-osx-arm64-0.16.4/lib"
+        LD_RUNPATH_SEARCH_PATHS: "/opt/homebrew/opt/llama.cpp/lib $(SRCROOT)/Vendor/voicevox_core-osx-arm64-0.16.4/lib @executable_path/../Frameworks"

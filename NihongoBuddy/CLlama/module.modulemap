@@ -1,0 +1,8 @@
+module CLlama {
+    header "/opt/homebrew/opt/llama.cpp/include/llama.h"
+    header "/opt/homebrew/opt/llama.cpp/include/mtmd.h"
+    header "/opt/homebrew/opt/llama.cpp/include/mtmd-helper.h"
+    link "llama"
+    link "mtmd"
+    export *
+}

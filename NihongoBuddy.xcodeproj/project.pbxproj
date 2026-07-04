@@ -1,0 +1,492 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0343C2251DDFE490634483D9 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BBEA89E2BBD7F1E96E97F2 /* ModelManager.swift */; };
+		0FBFE3BC71B998360F8A3D98 /* BrainEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F1BF0C761230CC52FFC3C /* BrainEngine.swift */; };
+		1AC0AC6F62C56AAE55EAEC80 /* ConversationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58CAD70FC2A9F642E8ED313 /* ConversationEngine.swift */; };
+		48C06410A90F7C9A17A17273 /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = 0F9A783A8A105DC8FD6D628D /* Resources */; };
+		5478FFAC45E66D69710721F0 /* SpeechLevelMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800998A04BE8D8AEC6F28271 /* SpeechLevelMeter.swift */; };
+		7D410BEB4612F011A751D0AE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B04F1C569447835E286EF4 /* ContentView.swift */; };
+		8C2567A7E5FD19C7A75A11AD /* MistakeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D2D0E807FC477C27242A3E /* MistakeStore.swift */; };
+		930ABFCD6FFB44B5760588D0 /* NihongoBuddyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1E0FBAFB3BA69CBE7B4936 /* NihongoBuddyApp.swift */; };
+		98CB48FD2788F51257E190F8 /* AppleTTSFallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EFC8C2C0E678C00C85402B /* AppleTTSFallback.swift */; };
+		9AFD82849CEFD563658AB9D1 /* GemmaLlamaEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A05CBCA02E4145C76BF8343 /* GemmaLlamaEngine.swift */; };
+		B95E7F636E3E335628138AF1 /* CharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B968B693FBFA2367081D09 /* CharacterView.swift */; };
+		BA9653B2BCE4CEEA4680BB88 /* KokoroTTS in Frameworks */ = {isa = PBXBuildFile; productRef = 300BC2A04352568FF78CECE2 /* KokoroTTS */; };
+		BEC4ABA427C02A2AA7B963F2 /* KokoroEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D91195299E5A78464E5AF00 /* KokoroEngine.swift */; };
+		C00F8ABDAE9B955554440BE2 /* SpeechOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F1D216CFA47978623ED470 /* SpeechOutput.swift */; };
+		CC577A28EF92D6A3A281BEDB /* OutputFrameParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077F9EF2AC2E51C88A5900E7 /* OutputFrameParser.swift */; };
+		E2C46B505DD40CF1B81F9941 /* MicCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF54C90DDE10E1B25CB81C9F /* MicCapture.swift */; };
+		E7B97124E5360982F9839D73 /* VoicevoxEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B6E1C9E58EF3DDC58D1AAC /* VoicevoxEngine.swift */; };
+		FF9129729065D120B54DC1CA /* GifCharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C50002969CC383C7A2C0911 /* GifCharacterView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		02B6E1C9E58EF3DDC58D1AAC /* VoicevoxEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoicevoxEngine.swift; sourceTree = "<group>"; };
+		077F9EF2AC2E51C88A5900E7 /* OutputFrameParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputFrameParser.swift; sourceTree = "<group>"; };
+		0F9A783A8A105DC8FD6D628D /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Resources; path = NihongoBuddy/Resources; sourceTree = SOURCE_ROOT; };
+		25D2D0E807FC477C27242A3E /* MistakeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MistakeStore.swift; sourceTree = "<group>"; };
+		2A1E0FBAFB3BA69CBE7B4936 /* NihongoBuddyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NihongoBuddyApp.swift; sourceTree = "<group>"; };
+		446A221F4A0974032D90BA62 /* NihongoBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NihongoBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4621699A844F41F3B8FB3977 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		47BBEA89E2BBD7F1E96E97F2 /* ModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
+		4D91195299E5A78464E5AF00 /* KokoroEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KokoroEngine.swift; sourceTree = "<group>"; };
+		58B04F1C569447835E286EF4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		66CF929EF58719F68490209A /* NihongoBuddy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NihongoBuddy.entitlements; sourceTree = "<group>"; };
+		7A05CBCA02E4145C76BF8343 /* GemmaLlamaEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GemmaLlamaEngine.swift; sourceTree = "<group>"; };
+		800998A04BE8D8AEC6F28271 /* SpeechLevelMeter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechLevelMeter.swift; sourceTree = "<group>"; };
+		856587BD6F8E53DD1D737241 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		86B968B693FBFA2367081D09 /* CharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterView.swift; sourceTree = "<group>"; };
+		890F1BF0C761230CC52FFC3C /* BrainEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrainEngine.swift; sourceTree = "<group>"; };
+		8EFEC2B0CB576C9BF95BFC17 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		91EFC8C2C0E678C00C85402B /* AppleTTSFallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleTTSFallback.swift; sourceTree = "<group>"; };
+		97F1D216CFA47978623ED470 /* SpeechOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechOutput.swift; sourceTree = "<group>"; };
+		9C50002969CC383C7A2C0911 /* GifCharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifCharacterView.swift; sourceTree = "<group>"; };
+		BF54C90DDE10E1B25CB81C9F /* MicCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicCapture.swift; sourceTree = "<group>"; };
+		F58CAD70FC2A9F642E8ED313 /* ConversationEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationEngine.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		11F9D71AFC4B75E55B5A55CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BA9653B2BCE4CEEA4680BB88 /* KokoroTTS in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		26FB27D32EDDEEE6CFB1E316 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				47BBEA89E2BBD7F1E96E97F2 /* ModelManager.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2AC2D4AF9ECA6306A63E6696 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				86B968B693FBFA2367081D09 /* CharacterView.swift */,
+				9C50002969CC383C7A2C0911 /* GifCharacterView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		50B0085B4373712A312F68D1 /* Speech */ = {
+			isa = PBXGroup;
+			children = (
+				91EFC8C2C0E678C00C85402B /* AppleTTSFallback.swift */,
+				4D91195299E5A78464E5AF00 /* KokoroEngine.swift */,
+				97F1D216CFA47978623ED470 /* SpeechOutput.swift */,
+				02B6E1C9E58EF3DDC58D1AAC /* VoicevoxEngine.swift */,
+			);
+			path = Speech;
+			sourceTree = "<group>";
+		};
+		69D9974B744F02F17EB30F8F /* App */ = {
+			isa = PBXGroup;
+			children = (
+				58B04F1C569447835E286EF4 /* ContentView.swift */,
+				2A1E0FBAFB3BA69CBE7B4936 /* NihongoBuddyApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		90B1C05227F3F9B78E1961D2 /* CVoicevox */ = {
+			isa = PBXGroup;
+			children = (
+				4621699A844F41F3B8FB3977 /* module.modulemap */,
+			);
+			path = CVoicevox;
+			sourceTree = "<group>";
+		};
+		9526F5405DF792D300BDB1BF /* Brain */ = {
+			isa = PBXGroup;
+			children = (
+				890F1BF0C761230CC52FFC3C /* BrainEngine.swift */,
+				7A05CBCA02E4145C76BF8343 /* GemmaLlamaEngine.swift */,
+			);
+			path = Brain;
+			sourceTree = "<group>";
+		};
+		97345CA3CECFF775E20DE88E /* CLlama */ = {
+			isa = PBXGroup;
+			children = (
+				8EFEC2B0CB576C9BF95BFC17 /* module.modulemap */,
+			);
+			path = CLlama;
+			sourceTree = "<group>";
+		};
+		BADA6CEB7EB8C8686E450533 /* NihongoBuddy */ = {
+			isa = PBXGroup;
+			children = (
+				856587BD6F8E53DD1D737241 /* Info.plist */,
+				66CF929EF58719F68490209A /* NihongoBuddy.entitlements */,
+				0F9A783A8A105DC8FD6D628D /* Resources */,
+				69D9974B744F02F17EB30F8F /* App */,
+				97345CA3CECFF775E20DE88E /* CLlama */,
+				DA35522DC2D49C60A7C4F7E0 /* Core */,
+				90B1C05227F3F9B78E1961D2 /* CVoicevox */,
+				26FB27D32EDDEEE6CFB1E316 /* Models */,
+				2AC2D4AF9ECA6306A63E6696 /* UI */,
+			);
+			path = NihongoBuddy;
+			sourceTree = "<group>";
+		};
+		C2E348165EFFCA4202069BA3 = {
+			isa = PBXGroup;
+			children = (
+				BADA6CEB7EB8C8686E450533 /* NihongoBuddy */,
+				E09AC79EAE41C65C0067CBCF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DA35522DC2D49C60A7C4F7E0 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				F58CAD70FC2A9F642E8ED313 /* ConversationEngine.swift */,
+				077F9EF2AC2E51C88A5900E7 /* OutputFrameParser.swift */,
+				EF19999DA8594EC4FDA5EBC2 /* Audio */,
+				9526F5405DF792D300BDB1BF /* Brain */,
+				EC5E0E24B5B92B2C20EB61B4 /* Memory */,
+				50B0085B4373712A312F68D1 /* Speech */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		E09AC79EAE41C65C0067CBCF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				446A221F4A0974032D90BA62 /* NihongoBuddy.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EC5E0E24B5B92B2C20EB61B4 /* Memory */ = {
+			isa = PBXGroup;
+			children = (
+				25D2D0E807FC477C27242A3E /* MistakeStore.swift */,
+			);
+			path = Memory;
+			sourceTree = "<group>";
+		};
+		EF19999DA8594EC4FDA5EBC2 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				BF54C90DDE10E1B25CB81C9F /* MicCapture.swift */,
+				800998A04BE8D8AEC6F28271 /* SpeechLevelMeter.swift */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D46D271768A5BFCC253A4E2F /* NihongoBuddy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B5F4AF37C99B3B52E82CB41 /* Build configuration list for PBXNativeTarget "NihongoBuddy" */;
+			buildPhases = (
+				006F9E26AF18C3022FF07FBA /* Sources */,
+				658C2FD7D23D3123E2D0D225 /* Resources */,
+				11F9D71AFC4B75E55B5A55CA /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NihongoBuddy;
+			packageProductDependencies = (
+				300BC2A04352568FF78CECE2 /* KokoroTTS */,
+			);
+			productName = NihongoBuddy;
+			productReference = 446A221F4A0974032D90BA62 /* NihongoBuddy.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F802EAE7008857A6D7FE30E0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					D46D271768A5BFCC253A4E2F = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = F322A18B9B33A1A015929427 /* Build configuration list for PBXProject "NihongoBuddy" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = C2E348165EFFCA4202069BA3;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				22E9F88423F6DDB16C57788E /* XCRemoteSwiftPackageReference "speech-swift" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = E09AC79EAE41C65C0067CBCF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D46D271768A5BFCC253A4E2F /* NihongoBuddy */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		658C2FD7D23D3123E2D0D225 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				48C06410A90F7C9A17A17273 /* Resources in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		006F9E26AF18C3022FF07FBA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				98CB48FD2788F51257E190F8 /* AppleTTSFallback.swift in Sources */,
+				0FBFE3BC71B998360F8A3D98 /* BrainEngine.swift in Sources */,
+				B95E7F636E3E335628138AF1 /* CharacterView.swift in Sources */,
+				7D410BEB4612F011A751D0AE /* ContentView.swift in Sources */,
+				1AC0AC6F62C56AAE55EAEC80 /* ConversationEngine.swift in Sources */,
+				9AFD82849CEFD563658AB9D1 /* GemmaLlamaEngine.swift in Sources */,
+				FF9129729065D120B54DC1CA /* GifCharacterView.swift in Sources */,
+				BEC4ABA427C02A2AA7B963F2 /* KokoroEngine.swift in Sources */,
+				E2C46B505DD40CF1B81F9941 /* MicCapture.swift in Sources */,
+				8C2567A7E5FD19C7A75A11AD /* MistakeStore.swift in Sources */,
+				0343C2251DDFE490634483D9 /* ModelManager.swift in Sources */,
+				930ABFCD6FFB44B5760588D0 /* NihongoBuddyApp.swift in Sources */,
+				CC577A28EF92D6A3A281BEDB /* OutputFrameParser.swift in Sources */,
+				5478FFAC45E66D69710721F0 /* SpeechLevelMeter.swift in Sources */,
+				C00F8ABDAE9B955554440BE2 /* SpeechOutput.swift in Sources */,
+				E7B97124E5360982F9839D73 /* VoicevoxEngine.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1ACC8AC9F6D2694FC96533F9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = NihongoBuddy/NihongoBuddy.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = NihongoBuddy/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "/opt/homebrew/opt/llama.cpp/lib $(SRCROOT)/Vendor/voicevox_core-osx-arm64-0.16.4/lib @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = "/opt/homebrew/opt/llama.cpp/lib $(SRCROOT)/Vendor/voicevox_core-osx-arm64-0.16.4/lib";
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				OTHER_SWIFT_FLAGS = "-Xcc -I/opt/homebrew/opt/llama.cpp/include -Xcc -I/opt/homebrew/opt/ggml/include -Xcc -DVOICEVOX_LOAD_ONNXRUNTIME";
+				PRODUCT_BUNDLE_IDENTIFIER = com.junechakma.NihongoBuddy;
+				SDKROOT = macosx;
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/NihongoBuddy/CLlama $(SRCROOT)/NihongoBuddy/CVoicevox";
+				SWIFT_VERSION = 5.10;
+			};
+			name = Debug;
+		};
+		9206139E3F0F9C49A4B10662 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = NihongoBuddy/NihongoBuddy.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = NihongoBuddy/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "/opt/homebrew/opt/llama.cpp/lib $(SRCROOT)/Vendor/voicevox_core-osx-arm64-0.16.4/lib @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = "/opt/homebrew/opt/llama.cpp/lib $(SRCROOT)/Vendor/voicevox_core-osx-arm64-0.16.4/lib";
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				OTHER_SWIFT_FLAGS = "-Xcc -I/opt/homebrew/opt/llama.cpp/include -Xcc -I/opt/homebrew/opt/ggml/include -Xcc -DVOICEVOX_LOAD_ONNXRUNTIME";
+				PRODUCT_BUNDLE_IDENTIFIER = com.junechakma.NihongoBuddy;
+				SDKROOT = macosx;
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/NihongoBuddy/CLlama $(SRCROOT)/NihongoBuddy/CVoicevox";
+				SWIFT_VERSION = 5.10;
+			};
+			name = Release;
+		};
+		9ADBE0A59722BA56CCB6053C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		F2FAD90A8F96AC0F9CFF4093 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9B5F4AF37C99B3B52E82CB41 /* Build configuration list for PBXNativeTarget "NihongoBuddy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1ACC8AC9F6D2694FC96533F9 /* Debug */,
+				9206139E3F0F9C49A4B10662 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F322A18B9B33A1A015929427 /* Build configuration list for PBXProject "NihongoBuddy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2FAD90A8F96AC0F9CFF4093 /* Debug */,
+				9ADBE0A59722BA56CCB6053C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		22E9F88423F6DDB16C57788E /* XCRemoteSwiftPackageReference "speech-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/soniqo/speech-swift";
+			requirement = {
+				kind = exactVersion;
+				version = 0.0.21;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		300BC2A04352568FF78CECE2 /* KokoroTTS */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 22E9F88423F6DDB16C57788E /* XCRemoteSwiftPackageReference "speech-swift" */;
+			productName = KokoroTTS;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = F802EAE7008857A6D7FE30E0 /* Project object */;
+}
