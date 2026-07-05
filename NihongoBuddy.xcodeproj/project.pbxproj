@@ -10,8 +10,10 @@
 		0343C2251DDFE490634483D9 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BBEA89E2BBD7F1E96E97F2 /* ModelManager.swift */; };
 		0FBFE3BC71B998360F8A3D98 /* BrainEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F1BF0C761230CC52FFC3C /* BrainEngine.swift */; };
 		1AC0AC6F62C56AAE55EAEC80 /* ConversationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58CAD70FC2A9F642E8ED313 /* ConversationEngine.swift */; };
+		47E46137F06F608B98AE4D15 /* MossTTSEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33EDCE9D905ED0ABF96CD2B /* MossTTSEngine.swift */; };
 		48C06410A90F7C9A17A17273 /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = 0F9A783A8A105DC8FD6D628D /* Resources */; };
 		5478FFAC45E66D69710721F0 /* SpeechLevelMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800998A04BE8D8AEC6F28271 /* SpeechLevelMeter.swift */; };
+		5C69B990B57619E2DE45B683 /* MossManifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5582511566033ECBDAAF3791 /* MossManifest.swift */; };
 		7D410BEB4612F011A751D0AE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B04F1C569447835E286EF4 /* ContentView.swift */; };
 		8C2567A7E5FD19C7A75A11AD /* MistakeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D2D0E807FC477C27242A3E /* MistakeStore.swift */; };
 		930ABFCD6FFB44B5760588D0 /* NihongoBuddyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1E0FBAFB3BA69CBE7B4936 /* NihongoBuddyApp.swift */; };
@@ -21,6 +23,7 @@
 		BA9653B2BCE4CEEA4680BB88 /* KokoroTTS in Frameworks */ = {isa = PBXBuildFile; productRef = 300BC2A04352568FF78CECE2 /* KokoroTTS */; };
 		BEC4ABA427C02A2AA7B963F2 /* KokoroEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D91195299E5A78464E5AF00 /* KokoroEngine.swift */; };
 		C00F8ABDAE9B955554440BE2 /* SpeechOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F1D216CFA47978623ED470 /* SpeechOutput.swift */; };
+		C88EA3F55A8F46C7D7C0FD0A /* moss_tts.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 306D2756FBF4AF2C859334FB /* moss_tts.cpp */; };
 		CC577A28EF92D6A3A281BEDB /* OutputFrameParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077F9EF2AC2E51C88A5900E7 /* OutputFrameParser.swift */; };
 		E2C46B505DD40CF1B81F9941 /* MicCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF54C90DDE10E1B25CB81C9F /* MicCapture.swift */; };
 		E7B97124E5360982F9839D73 /* VoicevoxEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B6E1C9E58EF3DDC58D1AAC /* VoicevoxEngine.swift */; };
@@ -33,21 +36,26 @@
 		0F9A783A8A105DC8FD6D628D /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Resources; path = NihongoBuddy/Resources; sourceTree = SOURCE_ROOT; };
 		25D2D0E807FC477C27242A3E /* MistakeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MistakeStore.swift; sourceTree = "<group>"; };
 		2A1E0FBAFB3BA69CBE7B4936 /* NihongoBuddyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NihongoBuddyApp.swift; sourceTree = "<group>"; };
+		2EFA51AA1EB0108C1138ADB9 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		306D2756FBF4AF2C859334FB /* moss_tts.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = moss_tts.cpp; sourceTree = "<group>"; };
 		446A221F4A0974032D90BA62 /* NihongoBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NihongoBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4621699A844F41F3B8FB3977 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		47BBEA89E2BBD7F1E96E97F2 /* ModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
 		4D91195299E5A78464E5AF00 /* KokoroEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KokoroEngine.swift; sourceTree = "<group>"; };
+		5582511566033ECBDAAF3791 /* MossManifest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MossManifest.swift; sourceTree = "<group>"; };
 		58B04F1C569447835E286EF4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		66CF929EF58719F68490209A /* NihongoBuddy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NihongoBuddy.entitlements; sourceTree = "<group>"; };
 		7A05CBCA02E4145C76BF8343 /* GemmaLlamaEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GemmaLlamaEngine.swift; sourceTree = "<group>"; };
 		800998A04BE8D8AEC6F28271 /* SpeechLevelMeter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechLevelMeter.swift; sourceTree = "<group>"; };
 		856587BD6F8E53DD1D737241 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		86B968B693FBFA2367081D09 /* CharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterView.swift; sourceTree = "<group>"; };
+		8826707D1B21E44E678D0A4D /* moss_tts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = moss_tts.h; sourceTree = "<group>"; };
 		890F1BF0C761230CC52FFC3C /* BrainEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrainEngine.swift; sourceTree = "<group>"; };
 		8EFEC2B0CB576C9BF95BFC17 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		91EFC8C2C0E678C00C85402B /* AppleTTSFallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleTTSFallback.swift; sourceTree = "<group>"; };
 		97F1D216CFA47978623ED470 /* SpeechOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechOutput.swift; sourceTree = "<group>"; };
 		9C50002969CC383C7A2C0911 /* GifCharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifCharacterView.swift; sourceTree = "<group>"; };
+		A33EDCE9D905ED0ABF96CD2B /* MossTTSEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MossTTSEngine.swift; sourceTree = "<group>"; };
 		BF54C90DDE10E1B25CB81C9F /* MicCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicCapture.swift; sourceTree = "<group>"; };
 		F58CAD70FC2A9F642E8ED313 /* ConversationEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationEngine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -101,6 +109,16 @@
 			path = App;
 			sourceTree = "<group>";
 		};
+		6ED0A7CDC95789C05EC97C15 /* CMossTTS */ = {
+			isa = PBXGroup;
+			children = (
+				2EFA51AA1EB0108C1138ADB9 /* module.modulemap */,
+				306D2756FBF4AF2C859334FB /* moss_tts.cpp */,
+				8826707D1B21E44E678D0A4D /* moss_tts.h */,
+			);
+			path = CMossTTS;
+			sourceTree = "<group>";
+		};
 		90B1C05227F3F9B78E1961D2 /* CVoicevox */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +155,7 @@
 				DA35522DC2D49C60A7C4F7E0 /* Core */,
 				90B1C05227F3F9B78E1961D2 /* CVoicevox */,
 				26FB27D32EDDEEE6CFB1E316 /* Models */,
+				D08CD10745574DF8C5AE9306 /* MossTTS */,
 				2AC2D4AF9ECA6306A63E6696 /* UI */,
 			);
 			path = NihongoBuddy;
@@ -148,6 +167,16 @@
 				BADA6CEB7EB8C8686E450533 /* NihongoBuddy */,
 				E09AC79EAE41C65C0067CBCF /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		D08CD10745574DF8C5AE9306 /* MossTTS */ = {
+			isa = PBXGroup;
+			children = (
+				5582511566033ECBDAAF3791 /* MossManifest.swift */,
+				A33EDCE9D905ED0ABF96CD2B /* MossTTSEngine.swift */,
+				6ED0A7CDC95789C05EC97C15 /* CMossTTS */,
+			);
+			path = MossTTS;
 			sourceTree = "<group>";
 		};
 		DA35522DC2D49C60A7C4F7E0 /* Core */ = {
@@ -274,11 +303,14 @@
 				E2C46B505DD40CF1B81F9941 /* MicCapture.swift in Sources */,
 				8C2567A7E5FD19C7A75A11AD /* MistakeStore.swift in Sources */,
 				0343C2251DDFE490634483D9 /* ModelManager.swift in Sources */,
+				5C69B990B57619E2DE45B683 /* MossManifest.swift in Sources */,
+				47E46137F06F608B98AE4D15 /* MossTTSEngine.swift in Sources */,
 				930ABFCD6FFB44B5760588D0 /* NihongoBuddyApp.swift in Sources */,
 				CC577A28EF92D6A3A281BEDB /* OutputFrameParser.swift in Sources */,
 				5478FFAC45E66D69710721F0 /* SpeechLevelMeter.swift in Sources */,
 				C00F8ABDAE9B955554440BE2 /* SpeechOutput.swift in Sources */,
 				E7B97124E5360982F9839D73 /* VoicevoxEngine.swift in Sources */,
+				C88EA3F55A8F46C7D7C0FD0A /* moss_tts.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,19 +321,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CODE_SIGN_ENTITLEMENTS = NihongoBuddy/NihongoBuddy.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				HEADER_SEARCH_PATHS = "/opt/homebrew/opt/onnxruntime/include/onnxruntime /opt/homebrew/opt/sentencepiece/include";
 				INFOPLIST_FILE = NihongoBuddy/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "/opt/homebrew/opt/llama.cpp/lib $(SRCROOT)/Vendor/voicevox_core-osx-arm64-0.16.4/lib @executable_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = "/opt/homebrew/opt/llama.cpp/lib $(SRCROOT)/Vendor/voicevox_core-osx-arm64-0.16.4/lib";
+				LD_RUNPATH_SEARCH_PATHS = "/opt/homebrew/opt/llama.cpp/lib $(SRCROOT)/Vendor/voicevox_core-osx-arm64-0.16.4/lib /opt/homebrew/opt/onnxruntime/lib /opt/homebrew/opt/sentencepiece/lib @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = "/opt/homebrew/opt/llama.cpp/lib $(SRCROOT)/Vendor/voicevox_core-osx-arm64-0.16.4/lib /opt/homebrew/opt/onnxruntime/lib /opt/homebrew/opt/sentencepiece/lib";
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				OTHER_SWIFT_FLAGS = "-Xcc -I/opt/homebrew/opt/llama.cpp/include -Xcc -I/opt/homebrew/opt/ggml/include -Xcc -DVOICEVOX_LOAD_ONNXRUNTIME";
 				PRODUCT_BUNDLE_IDENTIFIER = com.junechakma.NihongoBuddy;
 				SDKROOT = macosx;
-				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/NihongoBuddy/CLlama $(SRCROOT)/NihongoBuddy/CVoicevox";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/NihongoBuddy/CLlama $(SRCROOT)/NihongoBuddy/CVoicevox $(SRCROOT)/NihongoBuddy/MossTTS/CMossTTS";
 				SWIFT_VERSION = 5.10;
 			};
 			name = Debug;
@@ -310,19 +344,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CODE_SIGN_ENTITLEMENTS = NihongoBuddy/NihongoBuddy.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				HEADER_SEARCH_PATHS = "/opt/homebrew/opt/onnxruntime/include/onnxruntime /opt/homebrew/opt/sentencepiece/include";
 				INFOPLIST_FILE = NihongoBuddy/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "/opt/homebrew/opt/llama.cpp/lib $(SRCROOT)/Vendor/voicevox_core-osx-arm64-0.16.4/lib @executable_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = "/opt/homebrew/opt/llama.cpp/lib $(SRCROOT)/Vendor/voicevox_core-osx-arm64-0.16.4/lib";
+				LD_RUNPATH_SEARCH_PATHS = "/opt/homebrew/opt/llama.cpp/lib $(SRCROOT)/Vendor/voicevox_core-osx-arm64-0.16.4/lib /opt/homebrew/opt/onnxruntime/lib /opt/homebrew/opt/sentencepiece/lib @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = "/opt/homebrew/opt/llama.cpp/lib $(SRCROOT)/Vendor/voicevox_core-osx-arm64-0.16.4/lib /opt/homebrew/opt/onnxruntime/lib /opt/homebrew/opt/sentencepiece/lib";
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				OTHER_SWIFT_FLAGS = "-Xcc -I/opt/homebrew/opt/llama.cpp/include -Xcc -I/opt/homebrew/opt/ggml/include -Xcc -DVOICEVOX_LOAD_ONNXRUNTIME";
 				PRODUCT_BUNDLE_IDENTIFIER = com.junechakma.NihongoBuddy;
 				SDKROOT = macosx;
-				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/NihongoBuddy/CLlama $(SRCROOT)/NihongoBuddy/CVoicevox";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/NihongoBuddy/CLlama $(SRCROOT)/NihongoBuddy/CVoicevox $(SRCROOT)/NihongoBuddy/MossTTS/CMossTTS";
 				SWIFT_VERSION = 5.10;
 			};
 			name = Release;

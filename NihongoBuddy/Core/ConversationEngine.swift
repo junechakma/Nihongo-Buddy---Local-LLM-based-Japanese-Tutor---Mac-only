@@ -39,6 +39,7 @@ final class ConversationEngine: ObservableObject {
         do {
             warmUpStatus = "Opening memory…"
             try await store.open()
+            history = Self.loadHistory()
 
             warmUpStatus = "Preparing microphone…"
             try await mic.prepare { [weak self] level in
@@ -187,6 +188,7 @@ final class ConversationEngine: ObservableObject {
                 history.append(HistoryTurn(role: .assistant, text: replyText))
             }
             trimHistory()
+            Self.saveHistory(history)
             mic.resumeIdleTap()
             state = .idle
             characterState = .idle
@@ -218,6 +220,30 @@ final class ConversationEngine: ObservableObject {
         let maxTurns = 20 // 10 user + 10 assistant
         if history.count > maxTurns {
             history.removeFirst(history.count - maxTurns)
+        }
+    }
+
+    // MARK: - History persistence
+
+    /// Conversation history survives app relaunches so the buddy stays
+    /// personal. The brain replays these turns into a fresh KV cache on the
+    /// first turn (and again after a context-overflow wipe).
+    private nonisolated static var historyURL: URL {
+        let dir = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("NihongoBuddy", isDirectory: true)
+        try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+        return dir.appendingPathComponent("history.json")
+    }
+
+    private nonisolated static func loadHistory() -> [HistoryTurn] {
+        guard let data = try? Data(contentsOf: historyURL),
+              let turns = try? JSONDecoder().decode([HistoryTurn].self, from: data) else { return [] }
+        return turns
+    }
+
+    private nonisolated static func saveHistory(_ turns: [HistoryTurn]) {
+        if let data = try? JSONEncoder().encode(turns) {
+            try? data.write(to: historyURL, options: .atomic)
         }
     }
 }

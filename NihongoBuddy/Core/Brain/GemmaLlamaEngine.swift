@@ -80,7 +80,8 @@ actor GemmaLlamaEngine: BrainEngine {
         return AsyncThrowingStream { continuation in
             Task {
                 do {
-                    try await self.runTurn(input: input, systemPrompt: systemPrompt, continuation: continuation)
+                    try await self.runTurn(input: input, history: history,
+                                           systemPrompt: systemPrompt, continuation: continuation)
                     continuation.finish()
                 } catch {
                     continuation.finish(throwing: error)
@@ -96,6 +97,7 @@ actor GemmaLlamaEngine: BrainEngine {
     // MARK: - Turn evaluation
 
     private func runTurn(input: BrainInput,
+                         history: [HistoryTurn],
                          systemPrompt: String,
                          continuation: AsyncThrowingStream<String, Error>.Continuation) throws {
         guard let context, let mtmdContext, let sampler, let model else {
@@ -105,9 +107,26 @@ actor GemmaLlamaEngine: BrainEngine {
         try makeRoomIfNeeded()
 
         // History lives in the KV cache — only the new turn is prefilled.
+        // On a fresh cache (app start, or after an overflow wipe) the KV holds
+        // nothing, so replay the transcript history in text form first —
+        // otherwise the model greets every turn with amnesia.
         var prompt = ""
+        // Model turns are replayed IN the output frame — bare-text model turns
+        // teach the model to answer without the frame (it imitates its own
+        // history), which breaks the parser downstream.
         if !systemPromptEvaluated {
             prompt += "<|turn>system\n\(systemPrompt)<turn|>\n"
+            var lastUserText = ""
+            for turn in history {
+                switch turn.role {
+                case .user:
+                    lastUserText = turn.text
+                    prompt += "<|turn>user\n\(turn.text)<turn|>\n"
+                case .assistant:
+                    prompt += "<|turn>model\n<heard>\(lastUserText)</heard>\n"
+                    prompt += "<reply emotion=\"neutral\">\(turn.text)</reply><turn|>\n"
+                }
+            }
         }
         let marker = String(cString: mtmd_default_marker())
 

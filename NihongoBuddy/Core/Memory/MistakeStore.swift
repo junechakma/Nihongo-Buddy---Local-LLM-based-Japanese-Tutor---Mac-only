@@ -47,13 +47,37 @@ actor MistakeStore {
               new_item_count INTEGER DEFAULT 0
             );
             """)
+        // The model sometimes emits whole English meta-sentences in the
+        // <mistake point="…"/> attribute; those got stored verbatim and then
+        // fed back into every system prompt as bogus "recurring mistakes".
+        // Purge them once, and record() rejects them going forward.
+        try exec("DELETE FROM learning_events WHERE type = 'mistake' AND length(grammar_point) > 40;")
+
         try exec("INSERT INTO sessions (start) VALUES (datetime('now'));")
         sessionID = sqlite3_last_insert_rowid(db)
+    }
+
+    /// A usable grammar point is a short label (「particle を vs に」), not a
+    /// meta-sentence. Reject anything long or discursive rather than letting
+    /// it poison future system prompts.
+    private static func sanitizedGrammarPoint(_ point: String?) -> String? {
+        guard var point = point?.trimmingCharacters(in: .whitespacesAndNewlines),
+              !point.isEmpty else { return nil }
+        point = point.replacingOccurrences(of: "\n", with: " ")
+        guard point.count <= 40 else { return nil }
+        return point
     }
 
     func record(_ type: EventType, item: String, wrong: String? = nil,
                 correct: String? = nil, grammarPoint: String? = nil, jlptLevel: String? = nil) {
         guard db != nil else { return }
+        var grammarPoint = grammarPoint
+        if type == .mistake {
+            // A "correction" where nothing changed is model noise, not a mistake.
+            if let wrong, let correct, wrong == correct { return }
+            grammarPoint = Self.sanitizedGrammarPoint(grammarPoint)
+            if grammarPoint == nil { return }
+        }
         var stmt: OpaquePointer?
         let sql = """
             INSERT INTO learning_events (ts, session_id, type, item, wrong, correct, grammar_point, jlpt_level)

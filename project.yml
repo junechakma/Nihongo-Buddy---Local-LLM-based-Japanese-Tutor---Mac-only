@@ -42,7 +42,11 @@ targets:
         CODE_SIGN_STYLE: Automatic
         # llama.cpp linked from Homebrew, pinned build 9870 (docs/VALIDATION.md).
         # Release builds must bundle the dylibs into the .app instead (§10).
-        SWIFT_INCLUDE_PATHS: "$(SRCROOT)/NihongoBuddy/CLlama $(SRCROOT)/NihongoBuddy/CVoicevox"
+        SWIFT_INCLUDE_PATHS: "$(SRCROOT)/NihongoBuddy/CLlama $(SRCROOT)/NihongoBuddy/CVoicevox $(SRCROOT)/NihongoBuddy/MossTTS/CMossTTS"
         OTHER_SWIFT_FLAGS: "-Xcc -I/opt/homebrew/opt/llama.cpp/include -Xcc -I/opt/homebrew/opt/ggml/include -Xcc -DVOICEVOX_LOAD_ONNXRUNTIME"
-        LIBRARY_SEARCH_PATHS: "/opt/homebrew/opt/llama.cpp/lib $(SRCROOT)/Vendor/voicevox_core-osx-arm64-0.16.4/lib"
-        LD_RUNPATH_SEARCH_PATHS: "/opt/homebrew/opt/llama.cpp/lib $(SRCROOT)/Vendor/voicevox_core-osx-arm64-0.16.4/lib @executable_path/../Frameworks"
+        # MOSS-TTS-Nano native shim (NihongoBuddy/MossTTS/CMossTTS/moss_tts.cpp)
+        # compiles against Homebrew onnxruntime + sentencepiece.
+        CLANG_CXX_LANGUAGE_STANDARD: "c++17"
+        HEADER_SEARCH_PATHS: "/opt/homebrew/opt/onnxruntime/include/onnxruntime /opt/homebrew/opt/sentencepiece/include"
+        LIBRARY_SEARCH_PATHS: "/opt/homebrew/opt/llama.cpp/lib $(SRCROOT)/Vendor/voicevox_core-osx-arm64-0.16.4/lib /opt/homebrew/opt/onnxruntime/lib /opt/homebrew/opt/sentencepiece/lib"
+        LD_RUNPATH_SEARCH_PATHS: "/opt/homebrew/opt/llama.cpp/lib $(SRCROOT)/Vendor/voicevox_core-osx-arm64-0.16.4/lib /opt/homebrew/opt/onnxruntime/lib /opt/homebrew/opt/sentencepiece/lib @executable_path/../Frameworks"

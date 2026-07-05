@@ -1,0 +1,6 @@
+module CMossTTS {
+    header "/Users/junechakma/Freelance/June Chakma/Nihongo Buddy/Nihongo Buddy/NihongoBuddy/MossTTS/CMossTTS/moss_tts.h"
+    link "onnxruntime"
+    link "sentencepiece"
+    export *
+}

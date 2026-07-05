@@ -6,8 +6,8 @@ enum BrainInput {
     case text(String)
 }
 
-struct HistoryTurn {
-    enum Role { case user, assistant }
+struct HistoryTurn: Codable {
+    enum Role: String, Codable { case user, assistant }
     let role: Role
     let text: String
 }
