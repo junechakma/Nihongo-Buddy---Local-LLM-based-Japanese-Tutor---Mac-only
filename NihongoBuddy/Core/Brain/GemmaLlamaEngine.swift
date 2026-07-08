@@ -68,9 +68,10 @@ actor GemmaLlamaEngine: BrainEngine {
         self.mtmdContext = mtmdContext
 
         let chain = llama_sampler_chain_init(llama_sampler_chain_default_params())
-        llama_sampler_chain_add(chain, llama_sampler_init_penalties(64, 1.1, 0, 0))
-        llama_sampler_chain_add(chain, llama_sampler_init_min_p(0.05, 1))
-        llama_sampler_chain_add(chain, llama_sampler_init_temp(0.8))
+        llama_sampler_chain_add(chain, llama_sampler_init_penalties(64, 1.06, 0, 0))
+        llama_sampler_chain_add(chain, llama_sampler_init_top_k(64))
+        llama_sampler_chain_add(chain, llama_sampler_init_top_p(0.95, 1))
+        llama_sampler_chain_add(chain, llama_sampler_init_temp(1.0))
         llama_sampler_chain_add(chain, llama_sampler_init_dist(UInt32.random(in: 0..<UInt32.max)))
         self.sampler = chain
     }

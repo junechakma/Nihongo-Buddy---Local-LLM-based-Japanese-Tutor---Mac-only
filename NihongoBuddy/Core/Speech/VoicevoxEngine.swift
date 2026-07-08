@@ -150,6 +150,7 @@ actor VoicevoxEngine: SpeechOutput {
         stopped = true
         playerNode.stop()
         if englishReady { await english.stop() }
+        await englishFallback.stop()
     }
 
     private func synthesizeWav(_ text: String, style: UInt32) throws -> Data {

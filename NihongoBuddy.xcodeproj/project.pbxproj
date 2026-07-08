@@ -13,6 +13,7 @@
 		47E46137F06F608B98AE4D15 /* MossTTSEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33EDCE9D905ED0ABF96CD2B /* MossTTSEngine.swift */; };
 		48C06410A90F7C9A17A17273 /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = 0F9A783A8A105DC8FD6D628D /* Resources */; };
 		5478FFAC45E66D69710721F0 /* SpeechLevelMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800998A04BE8D8AEC6F28271 /* SpeechLevelMeter.swift */; };
+		5BBFEAFEE2BCD52C559B2B35 /* VoiceOrbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8F78C230CC597471A86542 /* VoiceOrbView.swift */; };
 		5C69B990B57619E2DE45B683 /* MossManifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5582511566033ECBDAAF3791 /* MossManifest.swift */; };
 		7D410BEB4612F011A751D0AE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B04F1C569447835E286EF4 /* ContentView.swift */; };
 		8C2567A7E5FD19C7A75A11AD /* MistakeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D2D0E807FC477C27242A3E /* MistakeStore.swift */; };
@@ -33,6 +34,7 @@
 /* Begin PBXFileReference section */
 		02B6E1C9E58EF3DDC58D1AAC /* VoicevoxEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoicevoxEngine.swift; sourceTree = "<group>"; };
 		077F9EF2AC2E51C88A5900E7 /* OutputFrameParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputFrameParser.swift; sourceTree = "<group>"; };
+		0F8F78C230CC597471A86542 /* VoiceOrbView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceOrbView.swift; sourceTree = "<group>"; };
 		0F9A783A8A105DC8FD6D628D /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Resources; path = NihongoBuddy/Resources; sourceTree = SOURCE_ROOT; };
 		25D2D0E807FC477C27242A3E /* MistakeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MistakeStore.swift; sourceTree = "<group>"; };
 		2A1E0FBAFB3BA69CBE7B4936 /* NihongoBuddyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NihongoBuddyApp.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 			children = (
 				86B968B693FBFA2367081D09 /* CharacterView.swift */,
 				9C50002969CC383C7A2C0911 /* GifCharacterView.swift */,
+				0F8F78C230CC597471A86542 /* VoiceOrbView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 				CC577A28EF92D6A3A281BEDB /* OutputFrameParser.swift in Sources */,
 				5478FFAC45E66D69710721F0 /* SpeechLevelMeter.swift in Sources */,
 				C00F8ABDAE9B955554440BE2 /* SpeechOutput.swift in Sources */,
+				5BBFEAFEE2BCD52C559B2B35 /* VoiceOrbView.swift in Sources */,
 				E7B97124E5360982F9839D73 /* VoicevoxEngine.swift in Sources */,
 				C88EA3F55A8F46C7D7C0FD0A /* moss_tts.cpp in Sources */,
 			);

@@ -14,11 +14,22 @@ struct ConversationTurn: Identifiable {
 final class ConversationEngine: ObservableObject {
     enum State { case warmingUp, idle, listening, thinking, speaking }
 
+    /// Manual: tap to record, tap to send. Auto: hands-free — a pause in
+    /// speech ends the turn, and listening restarts after each reply.
+    enum Mode: String, CaseIterable, Identifiable {
+        case manual = "Manual"
+        case auto = "Auto"
+        var id: String { rawValue }
+    }
+
     @Published private(set) var state: State = .warmingUp
     @Published private(set) var transcript: [ConversationTurn] = []
     @Published private(set) var characterState: CharacterState = .idle
     @Published private(set) var micLevel: Float = 0
     @Published private(set) var warmUpStatus: String = "Starting up…"
+    @Published var mode: Mode = .manual {
+        didSet { if oldValue != mode, mode == .manual { leaveAutoConversation() } }
+    }
 
     private let brain: any BrainEngine
     private let speech: any SpeechOutput
@@ -26,6 +37,18 @@ final class ConversationEngine: ObservableObject {
     private let store: MistakeStore
     private var history: [HistoryTurn] = []
     private var turnTask: Task<Void, Never>?
+
+    // MARK: Auto-mode voice activity detection
+    /// micLevel is normalized RMS (~0–1, see SpeechLevelMeter.rms). Levels
+    /// above this count as speech for turn-taking.
+    private static let voiceThreshold: Float = 0.12
+    /// Silence after speech that ends an auto-mode turn.
+    private static let pauseSeconds: TimeInterval = 1.5
+    private var autoActive = false
+    private var autoEndTask: Task<Void, Never>?
+    private var heardVoiceThisTurn = false
+    private var lastVoiceAt: Date?
+    private var listenStartedAt = Date()
 
     init(brain: any BrainEngine, speech: any SpeechOutput, mic: MicCapture, store: MistakeStore) {
         self.brain = brain
@@ -43,7 +66,7 @@ final class ConversationEngine: ObservableObject {
 
             warmUpStatus = "Preparing microphone…"
             try await mic.prepare { [weak self] level in
-                Task { @MainActor in self?.micLevel = level }
+                Task { @MainActor in self?.handleMicLevel(level) }
             }
 
             warmUpStatus = "Loading voice…"
@@ -88,14 +111,19 @@ final class ConversationEngine: ObservableObject {
         return total
     }
 
-    /// Single button: Speak → Done → (interrupt while speaking).
+    /// Single button. Manual: Speak → Done → (interrupt while speaking).
+    /// Auto: Start conversation → (tap while listening ends it; tap while
+    /// speaking interrupts and goes straight back to listening).
     func toggleTurn() async {
         switch state {
         case .idle:
-            mic.start()
-            state = .listening
-            characterState = .listening
+            if mode == .auto { autoActive = true }
+            startListening()
         case .listening:
+            if mode == .auto {
+                leaveAutoConversation()
+                return
+            }
             let audio = mic.finish()
             guard SpeechLevelMeter.containsSpeech(audio) else {
                 state = .idle
@@ -108,6 +136,76 @@ final class ConversationEngine: ObservableObject {
             await interrupt()
         case .warmingUp:
             break
+        }
+    }
+
+    private func startListening() {
+        mic.start()
+        state = .listening
+        characterState = .listening
+        heardVoiceThisTurn = false
+        lastVoiceAt = nil
+        listenStartedAt = Date()
+
+        autoEndTask?.cancel()
+        autoEndTask = nil
+        if mode == .auto, autoActive {
+            autoEndTask = Task { [weak self] in
+                while !Task.isCancelled {
+                    try? await Task.sleep(for: .milliseconds(150))
+                    await self?.autoCheckTurnEnd()
+                }
+            }
+        }
+    }
+
+    /// Level callback (~15 Hz, main queue): UI meter + auto-mode VAD.
+    private func handleMicLevel(_ level: Float) {
+        micLevel = level
+        if state == .listening, mode == .auto, level > Self.voiceThreshold {
+            heardVoiceThisTurn = true
+            lastVoiceAt = Date()
+        }
+    }
+
+    /// Auto mode: end the turn once the user has spoken and then paused.
+    private func autoCheckTurnEnd() {
+        guard mode == .auto, autoActive, state == .listening else { return }
+        if mic.isAtMaxLength {
+            finishAutoTurn()
+            return
+        }
+        guard heardVoiceThisTurn,
+              let last = lastVoiceAt,
+              Date().timeIntervalSince(last) >= Self.pauseSeconds,
+              Date().timeIntervalSince(listenStartedAt) >= 1.0 else { return }
+        finishAutoTurn()
+    }
+
+    private func finishAutoTurn() {
+        let audio = mic.finish()
+        guard SpeechLevelMeter.containsSpeech(audio) else {
+            // False trigger — keep listening on a fresh capture buffer.
+            mic.start()
+            heardVoiceThisTurn = false
+            lastVoiceAt = nil
+            listenStartedAt = Date()
+            return
+        }
+        autoEndTask?.cancel()
+        autoEndTask = nil
+        runTurn(audio: audio)
+    }
+
+    /// Tear down the hands-free loop and return to idle.
+    private func leaveAutoConversation() {
+        autoActive = false
+        autoEndTask?.cancel()
+        autoEndTask = nil
+        if state == .listening {
+            _ = mic.finish()
+            state = .idle
+            characterState = .idle
         }
     }
 
@@ -190,8 +288,15 @@ final class ConversationEngine: ObservableObject {
             trimHistory()
             Self.saveHistory(history)
             mic.resumeIdleTap()
-            state = .idle
-            characterState = .idle
+            // On interrupt() the canceller owns the state transition.
+            if !Task.isCancelled {
+                if mode == .auto, autoActive {
+                    startListening()
+                } else {
+                    state = .idle
+                    characterState = .idle
+                }
+            }
         }
     }
 
@@ -200,8 +305,12 @@ final class ConversationEngine: ObservableObject {
         await brain.cancelGeneration()
         await speech.stop()
         mic.resumeIdleTap()
-        state = .idle
-        characterState = .idle
+        if mode == .auto, autoActive {
+            startListening()
+        } else {
+            state = .idle
+            characterState = .idle
+        }
     }
 
     private func appendToBuddyTurn(_ text: String) {
@@ -262,7 +371,7 @@ enum SystemPrompt {
         var prompt = SystemPrompt.url().flatMap { try? String(contentsOf: $0, encoding: .utf8) } ?? ""
         assert(!prompt.isEmpty, "system.txt missing from bundle — character prompt not loaded")
         if !recurringMistakes.isEmpty {
-            prompt += "\n\n# Recurring mistakes to tease gently when they recur:\n"
+            prompt += "\n\n# Recurring mistakes to roast mercilessly when they recur:\n"
             for mistake in recurringMistakes {
                 prompt += "- \(mistake.grammarPoint) (\(mistake.count) times)\n"
             }
