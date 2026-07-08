@@ -300,6 +300,28 @@ final class ConversationEngine: ObservableObject {
         }
     }
 
+    /// Wipe transcript, persisted history and the brain's KV cache so the
+    /// buddy greets fresh on the next turn.
+    func startNewConversation() async {
+        guard state != .warmingUp else { return }
+        autoActive = false
+        autoEndTask?.cancel()
+        autoEndTask = nil
+        if state == .listening { _ = mic.finish() }
+        turnTask?.cancel()
+        await brain.cancelGeneration()
+        await speech.stop()
+        await turnTask?.value // let the cancelled turn drain before clearing
+        turnTask = nil
+        mic.resumeIdleTap()
+        transcript = []
+        history = []
+        Self.saveHistory(history)
+        await brain.resetConversation()
+        state = .idle
+        characterState = .idle
+    }
+
     private func interrupt() async {
         turnTask?.cancel()
         await brain.cancelGeneration()
@@ -368,7 +390,14 @@ enum SystemPrompt {
     }
 
     static func build(recurringMistakes: [MistakeStore.RecurringMistake]) -> String {
-        var prompt = SystemPrompt.url().flatMap { try? String(contentsOf: $0, encoding: .utf8) } ?? ""
+        // Settings panel can override the bundled prompt (customSystemPrompt).
+        let custom = UserDefaults.standard.string(forKey: "customSystemPrompt")
+        var prompt: String
+        if let custom, !custom.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            prompt = custom
+        } else {
+            prompt = SystemPrompt.url().flatMap { try? String(contentsOf: $0, encoding: .utf8) } ?? ""
+        }
         assert(!prompt.isEmpty, "system.txt missing from bundle — character prompt not loaded")
         if !recurringMistakes.isEmpty {
             prompt += "\n\n# Recurring mistakes to roast mercilessly when they recur:\n"

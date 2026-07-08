@@ -243,6 +243,16 @@ actor GemmaLlamaEngine: BrainEngine {
         nPast += count
     }
 
+    /// User started a new conversation: wipe the KV cache so the next turn
+    /// re-evaluates the system prompt with no prior turns.
+    func resetConversation() {
+        guard let context else { return }
+        let memory = llama_get_memory(context)
+        llama_memory_seq_rm(memory, 0, 0, -1)
+        nPast = 0
+        systemPromptEvaluated = false
+    }
+
     /// Context-overflow guard: when the KV cache nears n_ctx, drop everything
     /// after the system prompt. Simple v1 policy; MistakeStore carries the
     /// long-term memory (§3.7).

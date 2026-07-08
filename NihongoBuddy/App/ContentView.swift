@@ -2,65 +2,123 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var engine: ConversationEngine
+    @StateObject private var settings = AppSettings()
+    @State private var showSettings = false
 
     var body: some View {
-        ZStack {
-            LinearGradient(colors: [Color(red: 0.05, green: 0.06, blue: 0.12),
-                                    Color(red: 0.02, green: 0.02, blue: 0.05)],
-                           startPoint: .top, endPoint: .bottom)
-                .ignoresSafeArea()
+        GeometryReader { geo in
+            let compact = geo.size.width < 560
 
-            VStack(spacing: 18) {
-                HeaderBar()
-                GifCharacterView(state: engine.characterState)
-                    .frame(width: 190, height: 190)
-                TranscriptView(turns: engine.transcript)
-                StatusLine()
-                OrbButton()
-                    .padding(.bottom, 18)
+            ZStack {
+                LinearGradient(colors: [Color(red: 0.05, green: 0.06, blue: 0.12),
+                                        Color(red: 0.02, green: 0.02, blue: 0.05)],
+                               startPoint: .top, endPoint: .bottom)
+                    .ignoresSafeArea()
+
+                VStack(spacing: 0) {
+                    TopBar(compact: compact, showSettings: $showSettings)
+                        .padding(.horizontal, compact ? 16 : 28)
+                        .padding(.top, compact ? 10 : 18)
+                        .padding(.bottom, 8)
+
+                    if engine.transcript.isEmpty {
+                        // Empty state: the orb owns the screen, ChatGPT-voice style.
+                        Spacer()
+                        OrbButton(size: heroOrbSize(in: geo.size))
+                        Spacer()
+                    } else {
+                        TranscriptView(turns: engine.transcript)
+                            .frame(maxWidth: 760)
+                            .padding(.horizontal, compact ? 12 : 28)
+                            .padding(.top, 6)
+
+                        OrbButton(size: compact ? 132 : 168)
+                            .padding(.top, 14)
+                            .padding(.bottom, compact ? 14 : 24)
+                    }
+                }
+                .frame(maxWidth: .infinity)
             }
-            .padding(24)
         }
         .preferredColorScheme(.dark)
         .task { await engine.warmUp() }
+        .sheet(isPresented: $showSettings) {
+            SettingsView(settings: settings)
+        }
+    }
+
+    private func heroOrbSize(in size: CGSize) -> CGFloat {
+        min(min(size.width, size.height) * 0.48, 280)
     }
 }
 
-private struct HeaderBar: View {
+private struct TopBar: View {
     @EnvironmentObject var engine: ConversationEngine
+    let compact: Bool
+    @Binding var showSettings: Bool
 
     var body: some View {
-        HStack(alignment: .center) {
+        HStack(alignment: .center, spacing: 12) {
             VStack(alignment: .leading, spacing: 2) {
                 Text("Suki")
-                    .font(.system(size: 22, weight: .bold, design: .rounded))
+                    .font(.system(size: compact ? 19 : 22, weight: .bold, design: .rounded))
                     .foregroundStyle(.white)
-                Text("日本語 tutor · JLPT N5")
-                    .font(.caption)
-                    .foregroundStyle(.white.opacity(0.5))
+                if !compact {
+                    Text("日本語 tutor · JLPT N5")
+                        .font(.caption)
+                        .foregroundStyle(.white.opacity(0.5))
+                }
             }
+
             Spacer()
+
             Picker("", selection: $engine.mode) {
                 ForEach(ConversationEngine.Mode.allCases) { mode in
                     Text(mode.rawValue).tag(mode)
                 }
             }
             .pickerStyle(.segmented)
-            .frame(width: 170)
+            .frame(width: compact ? 140 : 170)
             .disabled(engine.state == .warmingUp)
+
+            Button {
+                Task { await engine.startNewConversation() }
+            } label: {
+                Image(systemName: "square.and.pencil")
+                    .font(.system(size: 14, weight: .medium))
+                    .foregroundStyle(.white.opacity(0.7))
+                    .frame(width: 32, height: 32)
+                    .background(.white.opacity(0.07), in: Circle())
+            }
+            .buttonStyle(.plain)
+            .disabled(engine.state == .warmingUp)
+            .help("New conversation")
+
+            Button {
+                showSettings = true
+            } label: {
+                Image(systemName: "gearshape.fill")
+                    .font(.system(size: 15, weight: .medium))
+                    .foregroundStyle(.white.opacity(0.7))
+                    .frame(width: 32, height: 32)
+                    .background(.white.opacity(0.07), in: Circle())
+            }
+            .buttonStyle(.plain)
+            .help("Settings")
         }
     }
 }
 
-/// The Siri-style orb IS the talk button.
+/// The orb IS the talk button — no icons, its motion is the interface.
 private struct OrbButton: View {
     @EnvironmentObject var engine: ConversationEngine
+    var size: CGFloat = 190
     @State private var hovering = false
 
     var body: some View {
-        VStack(spacing: 10) {
+        VStack(spacing: 12) {
             Button(action: { Task { await engine.toggleTurn() } }) {
-                VoiceOrbView(state: engine.state, level: engine.micLevel)
+                VoiceOrbView(state: engine.state, level: engine.micLevel, size: size)
             }
             .buttonStyle(.plain)
             .scaleEffect(hovering ? 1.04 : 1.0)
@@ -69,11 +127,19 @@ private struct OrbButton: View {
             .disabled(engine.state == .warmingUp)
             .keyboardShortcut(.space, modifiers: [])
 
-            Text(hint)
-                .font(.callout.weight(.medium))
-                .foregroundStyle(.white.opacity(0.65))
-                .contentTransition(.opacity)
-                .animation(.easeInOut(duration: 0.2), value: hint)
+            HStack(spacing: 8) {
+                if engine.state == .warmingUp {
+                    ProgressView()
+                        .controlSize(.small)
+                        .tint(.white)
+                }
+                Text(hint)
+                    .font(.callout.weight(.medium))
+                    .foregroundStyle(.white.opacity(0.65))
+                    .contentTransition(.opacity)
+                    .animation(.easeInOut(duration: 0.2), value: hint)
+            }
+            .frame(height: 20)
         }
     }
 
@@ -90,23 +156,6 @@ private struct OrbButton: View {
         case .speaking:
             return "Speaking — tap to interrupt"
         }
-    }
-}
-
-private struct StatusLine: View {
-    @EnvironmentObject var engine: ConversationEngine
-
-    var body: some View {
-        Group {
-            if engine.state == .warmingUp {
-                ProgressView()
-                    .controlSize(.small)
-                    .tint(.white)
-            } else {
-                Color.clear
-            }
-        }
-        .frame(height: 16)
     }
 }
 
@@ -130,13 +179,18 @@ struct TranscriptView: View {
                 RoundedRectangle(cornerRadius: 18)
                     .strokeBorder(.white.opacity(0.08), lineWidth: 1)
             )
-            .onChange(of: turns.count) {
-                if let last = turns.last {
-                    withAnimation(.easeOut(duration: 0.2)) {
-                        proxy.scrollTo(last.id, anchor: .bottom)
-                    }
-                }
-            }
+            .onChange(of: turns.count) { scrollToLatest(proxy) }
+            // Streaming: buddy text grows inside the last bubble without the
+            // count changing — follow it too.
+            .onChange(of: turns.last?.text) { scrollToLatest(proxy) }
+            .onAppear { scrollToLatest(proxy) }
+        }
+    }
+
+    private func scrollToLatest(_ proxy: ScrollViewProxy) {
+        guard let last = turns.last else { return }
+        withAnimation(.easeOut(duration: 0.2)) {
+            proxy.scrollTo(last.id, anchor: .bottom)
         }
     }
 }

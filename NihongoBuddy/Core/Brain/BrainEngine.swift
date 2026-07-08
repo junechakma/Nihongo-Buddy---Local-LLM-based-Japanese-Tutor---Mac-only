@@ -24,4 +24,8 @@ protocol BrainEngine: Actor {
 
     /// Abort any in-flight generation immediately (user interruption).
     func cancelGeneration()
+
+    /// Forget the current conversation (e.g. wipe the KV cache) so the next
+    /// turn starts fresh with only the system prompt.
+    func resetConversation()
 }

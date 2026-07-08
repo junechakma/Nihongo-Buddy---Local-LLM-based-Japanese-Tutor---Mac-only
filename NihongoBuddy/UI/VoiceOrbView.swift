@@ -10,6 +10,10 @@ import SwiftUI
 struct VoiceOrbView: View {
     let state: ConversationEngine.State
     let level: Float
+    var size: CGFloat = 190
+
+    /// All internal dimensions were designed at 190pt; scale from there.
+    private var s: CGFloat { size / 190 }
 
     var body: some View {
         TimelineView(.animation) { timeline in
@@ -19,9 +23,9 @@ struct VoiceOrbView: View {
                 Circle()
                     .fill(
                         RadialGradient(colors: [glowColor.opacity(0.45), .clear],
-                                       center: .center, startRadius: 8, endRadius: 90)
+                                       center: .center, startRadius: 8 * s, endRadius: 90 * s)
                     )
-                    .frame(width: 180, height: 180)
+                    .frame(width: 180 * s, height: 180 * s)
                     .scaleEffect(orbScale(t) * 1.15)
 
                 Group {
@@ -32,31 +36,26 @@ struct VoiceOrbView: View {
                     blob(t, speed: 1.5, phase: 4.2,
                          colors: [Color(red: 0.15, green: 0.85, blue: 0.75), Color(red: 0.30, green: 0.45, blue: 1.0)])
                 }
-                .frame(width: 96, height: 96)
+                .frame(width: 96 * s, height: 96 * s)
                 .scaleEffect(orbScale(t))
 
                 // Glassy core highlight
                 Circle()
                     .fill(
                         RadialGradient(colors: [.white.opacity(0.35), .white.opacity(0.02)],
-                                       center: .init(x: 0.35, y: 0.3), startRadius: 2, endRadius: 46)
+                                       center: .init(x: 0.35, y: 0.3), startRadius: 2 * s, endRadius: 46 * s)
                     )
-                    .frame(width: 92, height: 92)
+                    .frame(width: 92 * s, height: 92 * s)
                     .scaleEffect(orbScale(t))
-
-                Image(systemName: iconName)
-                    .font(.system(size: 26, weight: .semibold))
-                    .foregroundStyle(.white.opacity(0.92))
-                    .shadow(color: .black.opacity(0.35), radius: 3)
             }
-            .frame(width: 190, height: 190)
+            .frame(width: size, height: size)
         }
     }
 
     private func blob(_ t: TimeInterval, speed: Double, phase: Double, colors: [Color]) -> some View {
         Circle()
             .fill(AngularGradient(colors: colors + [colors[0]], center: .center))
-            .blur(radius: 14)
+            .blur(radius: 14 * s)
             .rotationEffect(.radians(t * speed))
             .offset(x: cos(t * speed * 1.3 + phase) * wobble,
                     y: sin(t * speed * 1.7 + phase) * wobble)
@@ -65,10 +64,10 @@ struct VoiceOrbView: View {
 
     private var wobble: CGFloat {
         switch state {
-        case .listening: return 10
-        case .speaking:  return 12
-        case .thinking:  return 6
-        default:         return 5
+        case .listening: return 10 * s
+        case .speaking:  return 12 * s
+        case .thinking:  return 6 * s
+        default:         return 5 * s
         }
     }
 
@@ -93,16 +92,6 @@ struct VoiceOrbView: View {
         case .thinking:  return Color(red: 0.70, green: 0.45, blue: 1.0)
         case .speaking:  return Color(red: 1.0, green: 0.40, blue: 0.70)
         default:         return Color(red: 0.40, green: 0.55, blue: 1.0)
-        }
-    }
-
-    private var iconName: String {
-        switch state {
-        case .warmingUp: return "hourglass"
-        case .idle:      return "mic.fill"
-        case .listening: return "waveform"
-        case .thinking:  return "ellipsis"
-        case .speaking:  return "stop.fill"
         }
     }
 }

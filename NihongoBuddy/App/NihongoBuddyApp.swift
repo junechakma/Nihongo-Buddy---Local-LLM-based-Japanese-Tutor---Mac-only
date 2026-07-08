@@ -10,11 +10,18 @@ struct NihongoBuddyApp: App {
     )
 
     var body: some Scene {
+        #if os(macOS)
         WindowGroup {
             ContentView()
                 .environmentObject(engine)
-                .frame(minWidth: 480, minHeight: 640)
+                .frame(minWidth: 420, minHeight: 560)
         }
-        .windowResizability(.contentSize)
+        .windowResizability(.automatic)
+        #else
+        WindowGroup {
+            ContentView()
+                .environmentObject(engine)
+        }
+        #endif
     }
 }
