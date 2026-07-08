@@ -37,6 +37,9 @@ final class ConversationEngine: ObservableObject {
     private let store: MistakeStore
     private var history: [HistoryTurn] = []
     private var turnTask: Task<Void, Never>?
+    /// customSystemPrompt value at the last turn — detects mid-conversation
+    /// edits from Settings so the brain's KV cache can be rebuilt.
+    private var lastPromptOverride: String?
 
     // MARK: Auto-mode voice activity detection
     /// micLevel is normalized RMS (~0–1, see SpeechLevelMeter.rms). Levels
@@ -224,6 +227,16 @@ final class ConversationEngine: ObservableObject {
             let speaking = Task { await speech.speak(sentenceStream) }
 
             do {
+                // The system prompt is evaluated into the KV cache on the first
+                // turn only. If the user edited it in Settings since the last
+                // turn, wipe the cache so the new prompt takes effect — the
+                // brain replays the visible history under the new prompt.
+                let promptOverride = UserDefaults.standard.string(forKey: "customSystemPrompt") ?? ""
+                if let last = lastPromptOverride, last != promptOverride {
+                    await brain.resetConversation()
+                }
+                lastPromptOverride = promptOverride
+
                 let systemPrompt = await SystemPrompt.build(recurringMistakes: store.topRecurring(limit: 5))
                 let stream = await brain.generate(input: .audio(audio), history: history, systemPrompt: systemPrompt)
 

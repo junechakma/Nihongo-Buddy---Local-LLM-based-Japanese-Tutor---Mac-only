@@ -54,6 +54,13 @@ actor VoicevoxEngine: SpeechOutput {
         return value > 0 ? value : 1.12
     }
 
+    /// Native VOICEVOX volumeScale — output gain applied at synthesis time
+    /// (some character styles are much quieter than others). >1.0 boosts.
+    private static var volumeScale: Float {
+        let value = UserDefaults.standard.float(forKey: "voicevoxVolume")
+        return value > 0 ? value : 1.0
+    }
+
     struct VoicevoxError: Error, CustomStringConvertible {
         let code: Int32
         let stage: String
@@ -166,6 +173,8 @@ actor VoicevoxEngine: SpeechOutput {
 
         query = query.replacingOccurrences(of: "\"speedScale\":1.0",
                                            with: "\"speedScale\":\(Self.playbackRate)")
+        query = query.replacingOccurrences(of: "\"volumeScale\":1.0",
+                                           with: "\"volumeScale\":\(Self.volumeScale)")
 
         var wavLength: UInt = 0
         var wavPointer: UnsafeMutablePointer<UInt8>?

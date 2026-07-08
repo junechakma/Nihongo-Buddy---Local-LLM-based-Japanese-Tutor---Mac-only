@@ -12,6 +12,9 @@ final class AppSettings: ObservableObject {
     @Published var rate: Double {
         didSet { UserDefaults.standard.set(Float(rate), forKey: "voicevoxRate") }
     }
+    @Published var volume: Double {
+        didSet { UserDefaults.standard.set(Float(volume), forKey: "voicevoxVolume") }
+    }
     @Published var systemPrompt: String {
         didSet {
             if systemPrompt == Self.defaultPrompt {
@@ -31,6 +34,8 @@ final class AppSettings: ObservableObject {
         styleId = storedStyle > 0 ? storedStyle : 16 // 九州そら ノーマル (engine default)
         let storedRate = defaults.float(forKey: "voicevoxRate")
         rate = storedRate > 0 ? Double(storedRate) : 1.12
+        let storedVolume = defaults.float(forKey: "voicevoxVolume")
+        volume = storedVolume > 0 ? Double(storedVolume) : 1.0
         let storedPrompt = defaults.string(forKey: "customSystemPrompt")
         systemPrompt = storedPrompt?.isEmpty == false ? storedPrompt! : Self.defaultPrompt
     }
@@ -55,7 +60,7 @@ struct VoiceCharacter: Identifiable {
         VoiceCharacter(id: "sora", name: "Kyushu Sora", japaneseName: "九州そら",
                        description: "Female · calm adult (default)",
                        styles: [.init(id: 16, name: "Normal"), .init(id: 15, name: "Sweet"),
-                                .init(id: 18, name: "Tsundere"), .init(id: 19, name: "Whisper")]),
+                                .init(id: 18, name: "Tsundere")]),
         VoiceCharacter(id: "himari", name: "Meimei Himari", japaneseName: "冥鳴ひまり",
                        description: "Female · soft, refined",
                        styles: [.init(id: 14, name: "Normal")]),
@@ -82,6 +87,7 @@ struct SettingsView: View {
                 VStack(alignment: .leading, spacing: 22) {
                     voiceSection
                     speedSection
+                    volumeSection
                     promptSection
                     credit
                 }
@@ -153,6 +159,32 @@ struct SettingsView: View {
         }
     }
 
+    // MARK: Volume
+
+    private var volumeSection: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            sectionTitle("Voice Volume")
+            sectionCaption("Synthesis gain — boost quiet character styles. Above 2× may distort.")
+
+            card {
+                HStack(spacing: 12) {
+                    Text("Quiet")
+                        .font(.caption)
+                        .foregroundStyle(.white.opacity(0.45))
+                    Slider(value: $settings.volume, in: 0.5...2.5, step: 0.05)
+                        .tint(Color(red: 0.35, green: 0.55, blue: 1.0))
+                    Text("Loud")
+                        .font(.caption)
+                        .foregroundStyle(.white.opacity(0.45))
+                    Text(String(format: "%.2f×", settings.volume))
+                        .font(.system(.caption, design: .monospaced).weight(.semibold))
+                        .foregroundStyle(.white.opacity(0.8))
+                        .frame(width: 46, alignment: .trailing)
+                }
+            }
+        }
+    }
+
     // MARK: System prompt
 
     private var promptSection: some View {
@@ -169,7 +201,7 @@ struct SettingsView: View {
                     .foregroundStyle(Color(red: 1.0, green: 0.45, blue: 0.45))
                 }
             }
-            sectionCaption("How the AI behaves and responds. Keep the <heard>/<reply>/<mistake> output tags — voice output depends on them.")
+            sectionCaption("How the AI behaves and responds. Replaces the entire built-in prompt and applies from the next reply. Keep the <heard>/<reply>/<mistake> output tags — voice output depends on them. For a clean personality switch, also start a new conversation: old replies in the chat history can pull the AI back to its old style.")
 
             TextEditor(text: $settings.systemPrompt)
                 .font(.system(size: 12.5, design: .monospaced))
