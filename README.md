@@ -12,8 +12,8 @@ A fully offline, native macOS app: talk to it, it listens, thinks, corrects your
 ## Stack
 
 - **App:** Native macOS (SwiftUI), targeting macOS 15+
-- **LLM:** Local Gemma model via `llama.cpp` (on-device inference, no cloud calls)
-- **TTS:** Voicevox (Japanese speech synthesis)
+- **LLM:** Local Gemma 4 E2B (GGUF) via `llama.cpp` — audio in, text out, no separate STT stage
+- **TTS:** VOICEVOX core (Japanese, expressive pitch-accent-correct speech) + Kokoro-82M CoreML (English)
 - Project generated with [XcodeGen](https://github.com/yonaskolb/XcodeGen) (`project.yml`)
 
 ## Project layout
@@ -23,13 +23,19 @@ NihongoBuddy/
   App/            App entry point
   Core/           Conversation engine, speech pipeline
   CLlama/         llama.cpp integration
-  CVoicevox/       Voicevox TTS integration
+  CVoicevox/      VOICEVOX TTS integration
   MossTTS/        MOSS-TTS experiments
-  Models/         Local model files
+  Models/         Model manager / download logic
   Resources/      Prompts, assets
   UI/             SwiftUI views
-docs/             Project spec, plans, validation notes
+docs/             Project spec, plans, asset locations, validation notes
+Vendor/           Third-party runtime binaries (VOICEVOX core, ONNX runtime, MOSS-TTS weights) — not tracked on main, see below
 ```
+
+## Branches
+
+- **`main`** — source only, pushed to GitHub. `Vendor/` is gitignored here: it's ~1GB of third-party binaries (VOICEVOX core/models, ONNX runtime, MOSS-TTS ONNX weights) that don't belong in GitHub history.
+- **`local-full`** — local development branch where `Vendor/` *is* tracked in git for convenience. Never pushed to origin.
 
 ## Setup
 
@@ -38,8 +44,13 @@ docs/             Project spec, plans, validation notes
    ```
    xcodegen generate
    ```
-3. Open `NihongoBuddy.xcodeproj` in Xcode and run.
-4. See `docs/docs.md` for the full project spec and `docs/PROCEDURE.md` for setup/build notes.
+3. Fetch runtime assets into `Vendor/` and `~/.lmstudio/models/...` — see `docs/ASSETS.md` for exact paths, sources, and sizes (main Gemma GGUF, audio projector, VOICEVOX core/models, Kokoro CoreML cache).
+4. Open `NihongoBuddy.xcodeproj` in Xcode and run.
+5. See `docs/docs.md` for the full project spec and `docs/PROCEDURE.md` for setup/build notes.
+
+## Credits / Licensing
+
+- **VOICEVOX:** free including commercial use, but the app must display "VOICEVOX:ずんだもん" (per character used) in About/credits — see `docs/ASSETS.md`.
 
 ## Status
 
