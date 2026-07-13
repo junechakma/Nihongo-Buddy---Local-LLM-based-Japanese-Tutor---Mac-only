@@ -413,7 +413,7 @@ enum SystemPrompt {
         }
         assert(!prompt.isEmpty, "system.txt missing from bundle — character prompt not loaded")
         if !recurringMistakes.isEmpty {
-            prompt += "\n\n# Recurring mistakes to roast mercilessly when they recur:\n"
+            prompt += "\n\n# Recurring mistakes — watch for these and correct them patiently when they recur:\n"
             for mistake in recurringMistakes {
                 prompt += "- \(mistake.grammarPoint) (\(mistake.count) times)\n"
             }

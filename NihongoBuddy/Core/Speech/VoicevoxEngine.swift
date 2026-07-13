@@ -130,6 +130,11 @@ actor VoicevoxEngine: SpeechOutput {
             if sentence.script == .english {
                 // English never goes to VOICEVOX (Japanese-only): Kokoro if
                 // loaded, otherwise the Apple system voice. Await to keep order.
+                // First drain any Japanese audio still playing on playerNode —
+                // otherwise Kokoro talks over it (two voices at once).
+                for task in completions { await task.value }
+                completions.removeAll()
+                if stopped { break }
                 let stream = AsyncStream<Sentence> { c in c.yield(sentence); c.finish() }
                 if englishReady {
                     await english.speak(stream)
